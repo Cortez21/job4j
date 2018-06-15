@@ -9,8 +9,8 @@ public class Calculate {
 	*Выводит текст на экран
 	*@param args - args
 	*/
-	public static void main (String[] args) {
-		System.out.println ("Hello world!");
+	public static void main(String[] args) {
+		System.out.println("Hello world!");
 	}		
 	
 	/**
