@@ -16,4 +16,18 @@ public class Max {
     public int max(int first, int second) {
         return first > second ? first : second;
     }
+
+    /**
+     * Выбирает большее значение из трех заданых чисел.
+     * Использует метод max пока не выявит большее.
+     * @param first - первое число.
+     * @param second - второе число.
+     * @param third - третье число.
+     * @return - возвращает большее из них.
+     */
+    public int max(int first, int second, int third) {
+        int temp = this.max(first, second);
+        return this.max(temp, third);
+
+    }
 }
