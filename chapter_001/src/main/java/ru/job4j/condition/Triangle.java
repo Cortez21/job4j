@@ -55,17 +55,6 @@ public class Triangle {
      * @return - существует ли треугольник (логическое true или false).
      */
     private boolean exist(double ab, double ac, double bc) {
-        if (ab > ac && ab > bc) {
-            return ab < (ac + bc);
-        } else if (ab > ac && ab < bc) {
-            return bc < (ac + ab);
-        } else if (ab < ac && ac > bc) {
-            return ac < (ab + bc);
-        } else if (ab < ac && ac < bc) {
-            return bc < (bc + ac);
-        } else {
-            return false;
-        }
-
+        return ((ab + ac > bc) && (ab + bc > ac) && (ac + bc > ab));
     }
 }
