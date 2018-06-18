@@ -1,6 +1,5 @@
 package ru.job4j.condition;
 
-
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com).
  * @version $Id$.
@@ -56,17 +55,7 @@ public class Triangle {
      * @return - существует ли треугольник (логическое true или false).
      */
     private boolean exist(double ab, double ac, double bc) {
-        if (ab > ac && ab > bc) {
-            return ab < (ac + bc);
-        } else if (ab > ac && ab < bc) {
-            return bc < (ac + ab);
-        } else if (ab < ac && ac > bc) {
-            return ac < (ab + bc);
-        } else if (ab < ac && ac < bc) {
-            return bc < (bc + ac);
-        } else {
-            return false;
-        }
+        return (ab != 0 || ac != 0 || bc != 0);
 
     }
 }
