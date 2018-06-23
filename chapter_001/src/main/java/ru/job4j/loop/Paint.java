@@ -1,4 +1,5 @@
 package ru.job4j.loop;
+import java.util.function.BiPredicate;
 
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
@@ -6,28 +7,42 @@ package ru.job4j.loop;
  * @since 0.1
  */
 public class Paint {
+    public String rightTrl(int height) {
+        return this.loopBy(
+                height,
+                height,
+                (row, column) -> row >= column
+        );
+    }
 
-    /**
-     * Создает псевдографичесую пирамиду на основе заданной высоты и возвращает результат в виде строки.
-     * @param height - заданная высота.
-     * @return - результат в виде строки.
-     */
-    public String piramid(int height) {
-        StringBuilder result = new StringBuilder();
-        // На основе заданной высоты вычисляем ширину пирамиды.
-        int weight = height * 2 - 1;
-        // С помощью внешнего и вложенного циклов пробегаем по всем ячейкам конструкции.
-        for (int rows = 0; rows < height; rows++) {
-            for (int cols = 0; cols < weight; cols++) {
-                // Условный оператор определят где заполнять ячейку, а где оставлять пустое место.
-                if (cols > height - 2 - rows && cols < height + rows) {
-                    result.append("^");
+    public String leftTrl(int height) {
+        return this.loopBy(
+                height,
+                height,
+                (row, column) -> row >= height - column - 1
+        );
+    }
+
+    public String pyramid(int height) {
+        return this.loopBy(
+                height,
+                2 * height - 1,
+                (row, column) -> row >= height - column - 1 && row + height - 1 >= column
+        );
+    }
+
+    private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
+        StringBuilder screen = new StringBuilder();
+        for (int row = 0; row != height; row++) {
+            for (int column = 0; column != weight; column++) {
+                if (predict.test(row, column)) {
+                    screen.append("^");
                 } else {
-                    result.append(" ");
+                    screen.append(" ");
                 }
             }
-            result.append(System.lineSeparator());
+            screen.append(System.lineSeparator());
         }
-        return result.toString();
+        return screen.toString();
     }
 }
