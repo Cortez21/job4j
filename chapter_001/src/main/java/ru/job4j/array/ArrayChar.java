@@ -22,11 +22,11 @@ public class ArrayChar {
      * @return - логический ответ.
      */
     public boolean srartWith(String prefix) {
-        boolean result = false;
+        boolean result = true;
         char[] value = prefix.toCharArray();
         for (int i = 0; i < value.length; i++) {
-            if (data[i] == value[i]) {
-                result = true;
+            if (data[i] != value[i]) {
+                result = false;
             }
         }
         return result;

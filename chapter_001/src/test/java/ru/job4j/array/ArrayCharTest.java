@@ -19,6 +19,13 @@ public class ArrayCharTest {
     public void whenHelloAndHi() {
         ArrayChar word = new ArrayChar("Hello");
         boolean result = word.srartWith("Hi");
-        assertThat(result, is(true));
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void whenHelloAndzz() {
+        ArrayChar word = new ArrayChar("Hello");
+        boolean result = word.srartWith("zzl");
+        assertThat(result, is(false));
     }
 }
