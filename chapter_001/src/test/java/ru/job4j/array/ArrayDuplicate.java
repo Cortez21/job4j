@@ -8,10 +8,18 @@ import java.util.Arrays;
 public class ArrayDuplicate {
     public String[] remove(String[] array) {
         for (int i = 0; i < array.length; i++) {
-            for (int a = 1; a < array.length; a++) {
-                break;
+            int border = array.length;
+            for (int a = i + 1; a < border; a++) {
+                if (array[i].equals(array[a])) {
+                    String replace = array[a];
+
+                }
             }
         }
         return array;
     }
+
 }
+
+
+

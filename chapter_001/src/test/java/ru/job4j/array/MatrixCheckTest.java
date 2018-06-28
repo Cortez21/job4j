@@ -12,10 +12,10 @@ public class MatrixCheckTest {
     public void whenTrue() {
         MatrixCheck matrix = new MatrixCheck();
         boolean[][] input = {
-                {false, true, true, true},
-                {true, false, true, true},
-                {true, true, false, true},
-                {true, true, true, false}
+                {false, true, true, false},
+                {true, false, false, true},
+                {true, false, false, true},
+                {false, true, true, false}
         };
         boolean result = matrix.mono(input);
         assertThat(result, is(true));
@@ -25,10 +25,10 @@ public class MatrixCheckTest {
     public void whenFalse() {
         MatrixCheck matrix = new MatrixCheck();
         boolean[][] input = {
-                {false, true, false, true},
-                {true, false, true, true},
-                {true, true, false, true},
-                {true, true, true, false}
+                {false, true, false},
+                {true, false, true},
+                {true, true, false}
+
         };
         boolean result = matrix.mono(input);
         boolean expect = false;
