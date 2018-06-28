@@ -18,8 +18,7 @@ public class MatrixCheckTest {
                 {true, true, true, false}
         };
         boolean result = matrix.mono(input);
-        boolean expect = true;
-        assertThat(result, is(expect));
+        assertThat(result, is(true));
     }
 
     @Test
