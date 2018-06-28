@@ -16,18 +16,13 @@ public class BubbleSort {
         // проходим по всем элементам массива и сдвигаем значения в лево пока не отсортируем
         // все числа массива в порядке возрастания.
         for (int i = 0; i < array.length; i++) {
-            boolean ifAllRight = true;
-            for (int a = 0; a < array.length - 1; a++) {
+            for (int a = 0; a < array.length - 1 - i; a++) {
                 int replace = 0;
                 if (array[a] > array[a + 1]) {
                     replace = array[a];
                     array[a] = array[a + 1];
                     array[a + 1 ] = replace;
-                    ifAllRight = false;
                 }
-            }
-            if (ifAllRight) {
-                break;
             }
         }
         return array;
