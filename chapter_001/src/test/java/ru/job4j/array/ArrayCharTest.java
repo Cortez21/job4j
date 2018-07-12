@@ -1,4 +1,5 @@
 package ru.job4j.array;
+
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -28,4 +29,5 @@ public class ArrayCharTest {
         boolean result = word.srartWith("zzl");
         assertThat(result, is(false));
     }
+
 }
