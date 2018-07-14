@@ -18,9 +18,7 @@ public class ArrayDuplicate {
             for (int a = i + 1; a < array.length - copies; a++) {
                 if (array[i].equals(array[a])) {
                     String replace = array[a];
-                    for (int j = a; j < array.length - 1; j++) {
-                        array[j] = array[j + 1];
-                    }
+                    System.arraycopy(array, a + 1, array, a, array.length - a - 1);
                     array[array.length - 1] = replace;
                     copies++;
                 }
