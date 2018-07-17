@@ -17,9 +17,10 @@ public class ArrayDuplicate {
         for (int i = 0; i < array.length - 1; i++) {
             for (int a = i + 1; a < array.length - copies; a++) {
                 if (array[i].equals(array[a])) {
-                    String replace = array[a];
-                    System.arraycopy(array, a + 1, array, a, array.length - a - 1);
-                    array[array.length - 1] = replace;
+                    String toBack = array[a];
+                    String toForward = array[array.length - 1 - copies];
+                    array[array.length - 1 - copies] = toBack;
+                    array[a] = toForward;
                     copies++;
                 }
             }
