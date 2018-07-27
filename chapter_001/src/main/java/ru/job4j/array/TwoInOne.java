@@ -17,7 +17,7 @@ public class TwoInOne {
         int posA = 0;
         int posB = 0;
         for (int i = 0; i < arrayC.length; i++) {
-            if (arrayA[posA] <= arrayB[posB]) {
+            /*if (arrayA[posA] <= arrayB[posB]) {
                 arrayC[i] = arrayA[posA];
                 if (posA < arrayA.length - 1) {
                     posA++;
@@ -31,6 +31,22 @@ public class TwoInOne {
                 } else {
                     arrayC[arrayC.length - 1] = arrayA[arrayA.length - 1];
                 }
+            }*/
+
+            if (posA <= arrayA.length - 1 && arrayA[posA] <= arrayB[posB]) {
+                arrayC[i] = arrayA[posA];
+                posA++;
+            } else if (posA > arrayA.length - 1 && posB <= arrayB.length - 1) {
+                arrayC[i] = arrayB[posB];
+                posB++;
+            } else if (posB <= arrayB.length - 1 && arrayB[posB] <= arrayA[posA]) {
+                arrayC[i] = arrayB[posB];
+                posB++;
+            } else if (posB > arrayB.length - 1 && posA <= arrayA.length - 1) {
+                arrayC[i] = arrayA[posA];
+                posA++;
+            } else {
+                break;
             }
         }
         return arrayC;
