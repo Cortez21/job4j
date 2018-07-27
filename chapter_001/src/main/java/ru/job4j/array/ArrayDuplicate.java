@@ -17,11 +17,15 @@ public class ArrayDuplicate {
         for (int i = 0; i < array.length - 1; i++) {
             for (int a = i + 1; a < array.length - copies; a++) {
                 if (array[i].equals(array[a])) {
+                    int mod = 1;
+                    if (array[i].equals(array[array.length - 1])) {
+                        mod = 2;
+                    }
                     String toBack = array[a];
-                    String toForward = array[array.length - 1 - copies];
+                    String toForward = array[array.length - mod - copies];
                     array[array.length - 1 - copies] = toBack;
                     array[a] = toForward;
-                    copies++;
+                    copies += mod;
                 }
             }
         }

@@ -17,4 +17,23 @@ public class ArrayDuplicateTest {
         String[] expect = new String[] {"Витя", "Петя", "Володя", "Альфонсо"};
         assertThat(result, is(expect));
     }
+
+    @Test
+    public void test() {
+        ArrayDuplicate array = new ArrayDuplicate();
+        String[] input = new String[] {"Витя", "Витя", "Витя"};
+        String[] result = array.remove(input);
+        String[] expect = new String[] {"Витя"};
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void test2() {
+        ArrayDuplicate array = new ArrayDuplicate();
+        String[] input = new String[] {"Витя", "Витя", "Коля", "Витя"};
+        String[] result = array.remove(input);
+        String[] expect = new String[] {"Витя", "Коля"};
+        assertThat(result, is(expect));
+    }
+
 }
