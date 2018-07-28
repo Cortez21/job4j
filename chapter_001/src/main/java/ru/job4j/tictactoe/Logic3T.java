@@ -47,14 +47,14 @@ public class Logic3T {
     }
 
     public boolean hasGap() {
-        boolean result = false;
+
         for (int i = 0; i < this.table.length; i++) {
             for (int a = 0; a < this.table.length; a++) {
-                if (table[i][a].hasMarkX() ||  table[i][a].hasMarkO()) {
-                    result = true;
+                if (!table[i][a].hasMarkX() && !table[i][a].hasMarkO()) {
+                    return true;
                 }
             }
         }
-        return result;
+        return false;
     }
 }
