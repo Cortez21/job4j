@@ -25,6 +25,7 @@ public class ArrayDuplicate {
                     String toForward = array[array.length - mod - copies];
                     array[array.length - 1 - copies] = toBack;
                     array[a] = toForward;
+                    a--;
                     copies += mod;
                 }
             }
