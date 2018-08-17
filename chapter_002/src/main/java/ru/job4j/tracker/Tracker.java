@@ -19,8 +19,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[indexPosition] = item;
-        indexPosition++;
+        this.items[indexPosition++] = item;
         return item;
     }
 
@@ -33,6 +32,7 @@ public class Tracker {
         for (int index = 0; index < this.items.length; index++) {
             if (this.items[index].getId().equals(id)) {
                 this.items[index] = item;
+                item.setId(id);
                 break;
             }
         }
@@ -58,11 +58,7 @@ public class Tracker {
      * @return - массив со всеми заполненными ячейками
      */
     public Item[] findAll() {
-        Item[] result = new Item[this.indexPosition];
-        for (int index = 0; index < this.indexPosition; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.indexPosition);
     }
 
     /**
@@ -88,7 +84,7 @@ public class Tracker {
      * @return - объект найденной заявки. Если заявка не найдена - возвращает null
      */
     public Item findById(String id) {
-        for (int index = 0; index <= indexPosition; index++) {
+        for (int index = 0; index < indexPosition; index++) {
             if (this.items[index].getId().equals(id)) {
                 return this.items[index];
             }

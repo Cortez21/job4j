@@ -25,26 +25,30 @@ public class TrackerTest {
 
     @Test
     public void whenDeleteOneOfThreeElements() {
-        Item item1 = new Item("name", "description");
-        Item item2 = new Item("name", "description");
-        Item item3 = new Item("name", "description");
+        Item[] items = new Item[] {
+                new Item("Name1", "desc"),
+                new Item("Name2", "desc"),
+                new Item("Name3", "desc")
+        };
         Tracker tracker = new Tracker();
-        String id = tracker.add(item1).getId();
-        tracker.add(item2);
-        tracker.add(item3);
+        tracker.add(items[0]);
+        tracker.add(items[1]);
+        tracker.add(items[2]);
+        String id = tracker.add(new Item("Name4", "desc")).getId();
         tracker.delete(id);
-        assertThat(tracker.findAll().length, is(2));
+        assertThat(tracker.findAll(), is(items));
     }
 
     @Test
     public void whenTwoNamesDuplicate() {
-        Item item1 = new Item("name", "description");
-        Item item2 = new Item("name", "description");
-        Item item3 = new Item("notName", "description");
+        Item[] items = new Item[] {
+                new Item("name", "desc"),
+                new Item("name", "desc")
+        };
         Tracker tracker = new Tracker();
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        assertThat(tracker.findByName("name").length, is(2));
+        tracker.add(items[0]);
+        tracker.add(items[1]);
+        tracker.add(new Item("notName", "desc"));
+        assertThat(tracker.findByName("name"), is(items));
     }
 }
