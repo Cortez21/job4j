@@ -1,13 +1,13 @@
 package ru.job4j.tracker;
 
 public class StartUI {
-    private static final String add = "0";
-    private static final String getAll = "1";
-    private static final String edit = "2";
-    private static final String delete = "3";
-    private static final String findById = "4";
-    private static final String findByName = "5";
-    private static final String exitProgram = "6";
+    private static final String ADD = "0";
+    private static final String GETALL = "1";
+    private static final String EDIT = "2";
+    private static final String DELETE = "3";
+    private static final String FINDBYID = "4";
+    private static final String FINDBYNAME = "5";
+    private static final String EXITPROGRAM = "6";
     Tracker tracker = new Tracker();
     ConsoleInput input = new ConsoleInput();
 
@@ -29,19 +29,19 @@ public class StartUI {
         while (!exit) {
             showMenu();
             String answer = input.ask("Choose your select:");
-            if (add.equals(answer)) {
+            if (ADD.equals(answer)) {
                 addItem();
-            } else if (getAll.equals(answer)) {
+            } else if (GETALL.equals(answer)) {
                 getAll();
-            } else if (edit.equals(answer)) {
+            } else if (EDIT.equals(answer)) {
                 edit();
-            } else if (delete.equals(answer)) {
+            } else if (DELETE.equals(answer)) {
                 delete();
-            } else if (findById.equals(answer)) {
+            } else if (FINDBYID.equals(answer)) {
                 findById();
-            } else if (findByName.equals(answer)) {
+            } else if (FINDBYNAME.equals(answer)) {
                 findByName();
-            } else if (exitProgram.equals(answer)) {
+            } else if (EXITPROGRAM.equals(answer)) {
                 exit = true;
             } else {
                 System.out.println("It's a wrong answer!");
@@ -54,7 +54,7 @@ public class StartUI {
      */
     private void addItem() {
         System.out.println("**************CREATING NEW TASK***************");
-        tracker.add(new Item(input.ask("Please, enter task's name: "),input.ask("Please, enter description: ")));
+        tracker.add(new Item(input.ask("Please, enter task's name: "), input.ask("Please, enter description: ")));
         System.out.println("Task was created!");
     }
 
@@ -116,18 +116,10 @@ public class StartUI {
      * Print menu of program interface
      */
     private void showMenu() {
-        System.out.println("0. Add new Item\n" +
-                "1. Show all items\n" +
-                "2. Edit item\n" +
-                "3. Delete item\n" +
-                "4. Find item by Id\n" +
-                "5. Find items by name\n" +
-                "6. Exit Program");
+        System.out.println("0. Add new Item\n" + "1. Show all items\n" + "2. Edit item\n" + "3. Delete item\n" + "4. Find item by Id\n" + "5. Find items by name\n" + "6. Exit Program");
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         new StartUI(new Tracker(), new ConsoleInput()).init();
     }
-
 }
