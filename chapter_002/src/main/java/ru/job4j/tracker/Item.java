@@ -39,4 +39,8 @@ public class Item {
     public String getId() {
         return id;
     }
+
+    public String toString() {
+        return "* ID: " + this.getId() + ". Name: " + this.getName() + ". Description: " + this.getDescription() + ".";
+    }
 }

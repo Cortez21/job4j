@@ -28,14 +28,17 @@ public class Tracker {
      * @param id - id заменяемого объекта
      * @param item - объект на который наменяем
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         for (int index = 0; index < this.items.length; index++) {
-            if (this.items[index].getId().equals(id)) {
+            if (this.items[index] != null && this.items[index].getId().equals(id)) {
                 this.items[index] = item;
                 item.setId(id);
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
@@ -43,14 +46,17 @@ public class Tracker {
      * которые находяться справа от указанного объекта.
      * @param id
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int index = 0; index < this.items.length; index++) {
-            if (this.items[index].getId().equals(id)) {
+            if (this.items[index] != null && this.items[index].getId().equals(id)) {
                 System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
                 this.indexPosition--;
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
@@ -100,5 +106,4 @@ public class Tracker {
         String id =  String.valueOf(System.currentTimeMillis() + RM.nextInt(100));
         return id;
     }
-
 }

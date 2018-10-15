@@ -64,7 +64,7 @@ public class StartUI {
     private void getAll() {
         System.out.println("List of tasks:");
         for (Item item: tracker.findAll()) {
-            System.out.println("* ID: " + item.getId() + ". Name: " + item.getName() + ". Description: " + item.getDescription() + ".");
+            System.out.println(item.toString());
         }
         System.out.println("END");
     }
@@ -74,11 +74,15 @@ public class StartUI {
      */
     private void edit() {
         System.out.println("**************EDITING TASK****************");
-        tracker.replace(
+        boolean result = tracker.replace(
                 input.ask("Enter tasks's ID for editing: "),
                 new Item(input.ask("Enter new name for task: "), input.ask("Enter new description for task: "))
         );
-        System.out.println("Task's data was changed.");
+        if (result) {
+            System.out.println("Task's data was changed.");
+        } else {
+            System.out.println("ERROR. ADVICE: CHECK THE ID!");
+        }
     }
 
     /**
@@ -86,8 +90,12 @@ public class StartUI {
      */
     private void delete() {
         System.out.println("****************DELETING TASK****************");
-        tracker.delete(input.ask("Enter task's ID for delete: "));
-        System.out.println("Task was deleted.");
+        boolean result = tracker.delete(input.ask("Enter task's ID for delete: "));
+        if (result) {
+            System.out.println("Task was deleted.");
+        } else {
+            System.out.println("ERROR. ADVICE: CHECK THE ID!");
+        }
     }
 
     /**
@@ -96,7 +104,11 @@ public class StartUI {
     private void findById() {
         System.out.println("************TASK SEARCHING(ID)************");
         Item result = tracker.findById(input.ask("Please, enter ID of task for seaching: "));
-        System.out.println("RESULT - Task's name: " + result.getName() + ". Description: " + result.getDescription());
+        if (result == null) {
+            System.out.println("Task not found. Please enter ID correctly");
+        } else {
+            System.out.println(result.toString());
+        }
     }
 
     /**
@@ -107,7 +119,7 @@ public class StartUI {
         Item[] result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
         System.out.println("RESULTS:");
         for (Item item : result) {
-            System.out.println("* ID: " + item.getId() + ". Name: " + item.getName() + ". Description: " + item.getDescription() + ".");
+            System.out.println(item.toString());
         }
         System.out.println("END");
     }
@@ -116,10 +128,14 @@ public class StartUI {
      * Print menu of program interface
      */
     private void showMenu() {
-        System.out.println("0. Add new Item\n" + "1. Show all items\n" + "2. Edit item\n" + "3. Delete item\n" + "4. Find item by Id\n" + "5. Find items by name\n" + "6. Exit Program");
+        System.out.println("0. Add new Item" + ls() + "1. Show all items" + ls() + "2. Edit item" + ls() + "3. Delete item" + ls() + "4. Find item by Id" + ls() + "5. Find items by name" + ls() + "6. Exit Program");
     }
 
     public static void main(String[] args) {
         new StartUI(new Tracker(), new ConsoleInput()).init();
+    }
+
+    private String ls() {
+        return System.lineSeparator();
     }
 }
