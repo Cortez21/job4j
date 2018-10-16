@@ -9,14 +9,14 @@ public class StartUI {
     private static final String FINDBYNAME = "5";
     private static final String EXITPROGRAM = "6";
     Tracker tracker = new Tracker();
-    ConsoleInput input = new ConsoleInput();
+    Input input = new ConsoleInput();
 
     /**
      * Constructor for setting object's parametters
      * @param tracker - object of tracker
      * @param input object for input/output operations
      */
-    public StartUI(Tracker tracker, ConsoleInput input) {
+    public StartUI(Tracker tracker, Input input) {
         this.tracker = tracker;
         this.input = input;
     }
@@ -24,7 +24,7 @@ public class StartUI {
     /**
      * Main class for talking with user
      */
-    private void init() {
+    public void init() {
         boolean exit = false;
         while (!exit) {
             showMenu();
