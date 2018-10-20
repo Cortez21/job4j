@@ -61,7 +61,7 @@ public class StartUI {
     /**
      * For printing all tasks of our tracker
      */
-    private void getAll() {
+    public void getAll() {
         System.out.println("List of tasks:");
         for (Item item: tracker.findAll()) {
             System.out.println(item.toString());
@@ -101,9 +101,9 @@ public class StartUI {
     /**
      * Find item by ID
      */
-    private void findById() {
+    public void findById() {
         System.out.println("************TASK SEARCHING(ID)************");
-        Item result = tracker.findById(input.ask("Please, enter ID of task for seaching: "));
+        Item result = tracker.findById(input.ask("Please, enter ID of task for searching: "));
         if (result == null) {
             System.out.println("Task not found. Please enter ID correctly");
         } else {
@@ -114,7 +114,7 @@ public class StartUI {
     /**
      * This method find all items by name
      */
-    private void findByName() {
+    public void findByName() {
         System.out.println("************TASK SEARCHING(NAME)***********");
         Item[] result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
         System.out.println("RESULTS:");
@@ -127,9 +127,23 @@ public class StartUI {
     /**
      * Print menu of program interface
      */
-    private void showMenu() {
+    public void showMenu() {
         StringBuilder builder = new StringBuilder();
-        System.out.println(builder.append("0. Add new Item").append(ls()).append("1. Show all items").append(ls()).append("2. Edit item").append(ls()).append("3. Delete item").append(ls()).append("4. Find item by Id").append(ls()).append("5. Find items by name").append(ls()).append("6. Exit Program").append(ls()));
+        System.out.println(builder
+                .append("0. Add new Item")
+                .append(ls())
+                .append("1. Show all items")
+                .append(ls())
+                .append("2. Edit item")
+                .append(ls())
+                .append("3. Delete item")
+                .append(ls())
+                .append("4. Find item by Id")
+                .append(ls())
+                .append("5. Find items by name")
+                .append(ls())
+                .append("6. Exit Program")
+                .append(ls()));
     }
 
     public static void main(String[] args) {
