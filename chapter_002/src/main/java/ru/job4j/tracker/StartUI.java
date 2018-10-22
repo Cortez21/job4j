@@ -61,10 +61,10 @@ public class StartUI {
     /**
      * For printing all tasks of our tracker
      */
-    public void getAll() {
+    private void getAll() {
         System.out.println("List of tasks:");
         for (Item item: tracker.findAll()) {
-            System.out.println(item.toString());
+            System.out.println(item);
         }
         System.out.println("END");
     }
@@ -101,25 +101,25 @@ public class StartUI {
     /**
      * Find item by ID
      */
-    public void findById() {
+    private void findById() {
         System.out.println("************TASK SEARCHING(ID)************");
         Item result = tracker.findById(input.ask("Please, enter ID of task for searching: "));
         if (result == null) {
             System.out.println("Task not found. Please enter ID correctly");
         } else {
-            System.out.println(result.toString());
+            System.out.println(result);
         }
     }
 
     /**
      * This method find all items by name
      */
-    public void findByName() {
+    private void findByName() {
         System.out.println("************TASK SEARCHING(NAME)***********");
         Item[] result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
         System.out.println("RESULTS:");
         for (Item item : result) {
-            System.out.println(item.toString());
+            System.out.println(item);
         }
         System.out.println("END");
     }
@@ -127,7 +127,7 @@ public class StartUI {
     /**
      * Print menu of program interface
      */
-    public void showMenu() {
+    private void showMenu() {
         StringBuilder builder = new StringBuilder();
         System.out.println(builder
                 .append("0. Add new Item")
