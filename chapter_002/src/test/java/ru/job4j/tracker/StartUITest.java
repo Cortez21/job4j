@@ -26,7 +26,6 @@ public class StartUITest {
             .append("5. Find items by name")
             .append(System.lineSeparator())
             .append("6. Exit Program")
-            .append(System.lineSeparator())
             .append(System.lineSeparator());
 
     @Test
