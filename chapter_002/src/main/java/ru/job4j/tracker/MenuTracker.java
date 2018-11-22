@@ -63,6 +63,10 @@ public class MenuTracker {
     private Tracker tracker;
     private ArrayList<UserAction> actions = new ArrayList<>();
 
+    public int getActionsLength() {
+        return actions.size();
+    }
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;

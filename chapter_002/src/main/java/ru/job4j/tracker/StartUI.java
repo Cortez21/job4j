@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 public class StartUI {
     Tracker tracker = new Tracker();
-    Input input = new ConsoleInput();
+    Input input = new ValidateInput();
 
     /**
      * Constructor for setting object's parametters
@@ -23,13 +23,13 @@ public class StartUI {
         int key = 0;
         while (key != new Exit().key()) {
             menu.showMenu();
-            key = Integer.valueOf(input.ask("Select your choice: "));
+            key = Integer.valueOf(input.ask("Select your choice: ", new int[menu.getActionsLength()]));
             menu.select(key);
         }
     }
 
     public static void main(String[] args) {
-        new StartUI(new Tracker(), new ConsoleInput()).init();
+        new StartUI(new Tracker(), new ValidateInput()).init();
     }
 
 }

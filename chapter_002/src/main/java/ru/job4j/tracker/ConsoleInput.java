@@ -5,8 +5,14 @@ import java.util.Scanner;
 public class ConsoleInput implements Input {
     private Scanner scan = new Scanner(System.in);
 
+    @Override
     public String ask(String question) {
         System.out.print(question);
         return scan.nextLine();
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        return Integer.valueOf(ask(question));
     }
 }
