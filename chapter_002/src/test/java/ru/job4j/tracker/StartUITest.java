@@ -157,7 +157,7 @@ public class StartUITest {
     public void whenEnteringInvalidData() {
         Tracker tracker = new Tracker();
 
-        new StartUI(tracker, new ValidateInput(new InputStub(new String[] {"Hi", "34", String.valueOf(new Exit().key())}))).init();
+        new StartUI(tracker, new ValidateInput(new InputStub(new String[] {"Hi", "34", "6"}))).init();
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
                         .append(buildMenu)

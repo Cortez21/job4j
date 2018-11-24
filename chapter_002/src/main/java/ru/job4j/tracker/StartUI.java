@@ -21,7 +21,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
         int key = 0;
-        while (key != new Exit().key()) {
+        while (key != menu.getActionsLength() - 1) {
             menu.showMenu();
             key = Integer.valueOf(input.ask("Select your choice: ", new int[menu.getActionsLength()]));
             menu.select(key);
