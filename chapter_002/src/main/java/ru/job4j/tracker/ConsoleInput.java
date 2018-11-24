@@ -13,6 +13,10 @@ public class ConsoleInput implements Input {
 
     @Override
     public int ask(String question, int[] range) {
-        return Integer.valueOf(ask(question));
+        int answer = Integer.valueOf(ask(question));
+        if (answer < 0 || answer >= range.length) {
+            throw new OutOfMenuException("Out of menu range");
+        }
+        return answer;
     }
 }

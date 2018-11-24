@@ -13,9 +13,6 @@ public class ValidateInput extends ConsoleInput {
             valid = true;
             try {
                 answer = super.ask(question, range);
-                if (answer < 0 || answer >= range.length) {
-                    throw new OutOfMenuException("Out of menu range");
-                }
             } catch (OutOfMenuException oome) {
                 System.out.println("Please, enter correct number of menu!");
                 valid = false;
