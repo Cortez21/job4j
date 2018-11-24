@@ -3,7 +3,16 @@ package ru.job4j.tracker;
 import java.util.Scanner;
 
 public class ValidateInput extends ConsoleInput {
-    private Scanner scan = new Scanner(System.in);
+    private final Input input;
+
+    public ValidateInput(Input input) {
+        this.input = input;
+    }
+
+    @Override
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
 
     @Override
     public int ask(String question, int[] range) {
@@ -12,7 +21,7 @@ public class ValidateInput extends ConsoleInput {
         do {
             valid = true;
             try {
-                answer = super.ask(question, range);
+                answer = this.input.ask(question, range);
             } catch (OutOfMenuException oome) {
                 System.out.println("Please, enter correct number of menu!");
                 valid = false;

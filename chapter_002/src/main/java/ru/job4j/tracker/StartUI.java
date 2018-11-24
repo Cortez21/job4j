@@ -1,8 +1,8 @@
 package ru.job4j.tracker;
 
 public class StartUI {
-    Tracker tracker = new Tracker();
-    Input input = new ValidateInput();
+    Tracker tracker;
+    Input input;
 
     /**
      * Constructor for setting object's parametters
@@ -29,7 +29,7 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        new StartUI(new Tracker(), new ValidateInput()).init();
+        new StartUI(new Tracker(), new ValidateInput(new ConsoleInput())).init();
     }
 
 }

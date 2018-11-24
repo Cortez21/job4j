@@ -153,4 +153,20 @@ public class StartUITest {
         ));
     }
 
+    @Test
+    public void whenEnteringInvalidData() {
+        Tracker tracker = new Tracker();
+
+        new StartUI(tracker, new ValidateInput(new InputStub(new String[] {"Hi", "34", String.valueOf(new Exit().key())}))).init();
+        assertThat(new String(out.toByteArray()), is(
+                new StringBuilder()
+                        .append(buildMenu)
+                        .append("Please, enter valid data!")
+                        .append(System.lineSeparator())
+                        .append("Please, enter correct number of menu!")
+                        .append(System.lineSeparator())
+                        .toString()
+        ));
+    }
+
 }

@@ -9,15 +9,15 @@ public class InputStub implements Input {
         this.value = value;
     }
 
-    public InputStub(String[] value, int[] values) {
-        this.value = value;
-    }
-
     public String ask(String question) {
         return this.value[this.position++];
     }
 
     public int ask(String question, int[] range) {
-        return Integer.valueOf(this.value[this.position++]);
+        int answer = Integer.valueOf(this.value[this.position++]);
+        if (answer < 0 || answer >= range.length) {
+            throw new OutOfMenuException("Out of menu range");
+        }
+        return answer;
     }
 }
