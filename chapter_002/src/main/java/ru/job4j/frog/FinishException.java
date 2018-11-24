@@ -1,4 +1,7 @@
 package ru.job4j.frog;
 
-public class FinishException {
+public class FinishException extends RuntimeException {
+    public FinishException(String message) {
+        super(message);
+    }
 }
