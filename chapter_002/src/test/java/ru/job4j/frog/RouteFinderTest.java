@@ -66,10 +66,11 @@ public class RouteFinderTest {
     public void whenPositionIsRing1Sector11() {
         RouteFinder route = new RouteFinder();
         ArrayList<Location> locations = route.search(new Location(1, 11));
-        for (Location loc : locations) {
-            System.out.println(loc);
-        }
-        System.out.println(System.lineSeparator());
+        ArrayList<Location> expect = new ArrayList<>();
+        expect.add(new Location(3, 12));
+        expect.add(new Location(2, 13));
+        expect.add(new Location(1, 14));
+        assertThat(expect.toString(), is(locations.toString()));
     }
 
 

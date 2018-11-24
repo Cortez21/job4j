@@ -40,8 +40,8 @@ public class RouteFinder {
     }
 
     public boolean checkTheTree(Location loc) {
-        return !(loc.getRing() == tree1.getRing() && loc.getSector() == tree1.getSector())
+        return !(loc.toString().equals(tree1.toString()))
                 &&
-                !(loc.getRing() == tree2.getRing() && loc.getSector() == tree2.getSector());
+                !(loc.toString().equals(tree2.toString()));
     }
 }
