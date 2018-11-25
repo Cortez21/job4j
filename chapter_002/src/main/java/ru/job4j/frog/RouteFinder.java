@@ -36,7 +36,7 @@ public class RouteFinder {
     }
 
     public boolean checkTheRange(Location loc) {
-        return !(loc.getRing() > 10) && !(loc.getRing() < 1);
+        return !(loc.getRing() > 10 || loc.getRing() < 1);
     }
 
     public boolean checkTheTree(Location loc) {
