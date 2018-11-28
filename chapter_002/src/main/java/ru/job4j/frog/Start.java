@@ -3,7 +3,16 @@ package ru.job4j.frog;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Start {
+    /**
+     * Manipulate the main logic of program
+     * @param args keys
+     */
     public static void main(String[] args) {
         Start start = new Start();
         Location finish = new Location(10, 9);
@@ -19,6 +28,10 @@ public class Start {
             }
             tryings++;
         }
+
+        /**
+         * Printing the map and result parameters
+         */
         System.out.println(new StringBuilder()
                 .append("The most shortly route is:")
                 .append(System.lineSeparator())
@@ -33,7 +46,10 @@ public class Start {
         );
     }
 
-
+    /**
+     * Taking a list of all possible ways and select one of these. Write to the map all turns
+     * @return the map if it has the way to finish
+     */
     private ArrayList<Location> trying() {
         RouteFinder route = new RouteFinder();
         Random rand = new Random();

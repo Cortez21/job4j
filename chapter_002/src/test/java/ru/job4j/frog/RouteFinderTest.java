@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class RouteFinderTest {
     @Test
     public void whenSectorIs326() {

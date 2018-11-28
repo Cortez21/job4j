@@ -1,5 +1,10 @@
 package ru.job4j.frog;
-
+/**
+ * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ * The class use as cell of all localization and move actions
+ */
 public class Location {
     private int ring;
     private int sector;
