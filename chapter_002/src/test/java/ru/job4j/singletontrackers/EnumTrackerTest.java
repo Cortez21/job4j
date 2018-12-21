@@ -48,4 +48,9 @@ public class EnumTrackerTest {
             tracker.delete(item.getId());
         }
     }
+
+    @Test
+    public void duplicateTesting() {
+        assertThat(EnumTracker.INSTANCE, is(EnumTracker.INSTANCE));
+    }
 }

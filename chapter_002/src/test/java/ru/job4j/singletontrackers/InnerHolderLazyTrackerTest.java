@@ -48,4 +48,9 @@ public class InnerHolderLazyTrackerTest {
             tracker.delete(item.getId());
         }
     }
+
+    @Test
+    public void duplicateTesting() {
+        assertThat(InnerHolderLazyTracker.getInstance(), is(InnerHolderLazyTracker.getInstance()));
+    }
 }

@@ -48,4 +48,9 @@ public class StaticFieldLazyTrackerTest {
             tracker.delete(item.getId());
         }
     }
+
+    @Test
+    public void duplicateTesting() {
+        assertThat(StaticFieldLazyTracker.getInstance(), is(StaticFieldLazyTracker.getInstance()));
+    }
 }

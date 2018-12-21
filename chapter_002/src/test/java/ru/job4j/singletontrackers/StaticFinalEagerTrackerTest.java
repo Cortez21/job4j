@@ -49,4 +49,9 @@ public class StaticFinalEagerTrackerTest {
             tracker.delete(item.getId());
         }
     }
+
+    @Test
+    public void duplicateTesting() {
+        assertThat(StaticFinalEagerTracker.getInstance(), is(StaticFinalEagerTracker.getInstance()));
+    }
 }
