@@ -16,7 +16,6 @@ class FindById extends BaseAction {
             System.out.println(result);
         }
     }
-
 }
 
 class FindByName extends BaseAction {
