@@ -2,8 +2,14 @@ package ru.job4j.coffeemachine;
 
 import java.util.ArrayList;
 
+/**
+ * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class StartUI {
     ArrayList<Product> products = new ArrayList<>();
+
 
     public StartUI() {
         this.products.add(new Product("Espresso", 8));
@@ -12,6 +18,9 @@ public class StartUI {
         this.products.add(new Product("Hot Chocolate", 17));
     }
 
+    /**
+     * Main method where UI communicate with a user
+     */
     public void start(Input input, CashBack cashback) {
 
         System.out.println(new StringBuilder()
@@ -34,8 +43,8 @@ public class StartUI {
                 );
             }
 
-            Product choice = products.get(input.protectedAsk("What do you prefer? Please enter number of product: ",products.size()));
-            int money = input.ask("Please, insert money: ");
+            Product choice = products.get(input.protectedRangeAsk("What do you prefer? Please enter number of product: ", products.size()));
+            int money = input.protectedMoneyAsk("Please, insert money: ", choice.getPrice());
 
             ArrayList<Integer> result = cashback.action(money, choice);
 
