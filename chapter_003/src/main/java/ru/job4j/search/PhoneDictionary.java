@@ -26,13 +26,7 @@ public class PhoneDictionary {
         Iterator<Person> iterator = persons.iterator();
         while (iterator.hasNext()) {
             Person temp = iterator.next();
-            if (temp.getName().contains(key)) {
-                result.add(temp);
-            } else if (temp.getPhone().contains(key)) {
-                result.add(temp);
-            } else if (temp.getSurname().contains(key)) {
-                result.add(temp);
-            } else if (temp.getAddress().contains(key)) {
+            if (temp.getName().contains(key) || temp.getPhone().contains(key) || temp.getSurname().contains(key) || temp.getAddress().contains(key)) {
                 result.add(temp);
             }
         }
