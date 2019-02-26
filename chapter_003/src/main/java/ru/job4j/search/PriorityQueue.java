@@ -2,7 +2,6 @@ package ru.job4j.search;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
  * @version $Id$
