@@ -16,16 +16,15 @@ public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
         int cells = (int) Math.ceil((float) list.size() / (float) rows);
         int[][] array = new int[rows][cells];
-        int index = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int a = 0; a < cells; a++) {
-                if (index >= list.size()) {
-                    array[i][a] = 0;
-                } else {
-                    array[i][a] = list.get(index);
-                }
-
-                index++;
+        int i = 0;
+        int a = 0;
+        for (Integer cell : list) {
+            array[i][a] = cell;
+            if (a < cells - 1) {
+                a++;
+            } else {
+                a = 0;
+                i++;
             }
         }
         return array;
