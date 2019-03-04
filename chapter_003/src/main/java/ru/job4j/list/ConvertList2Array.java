@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
@@ -28,5 +29,20 @@ public class ConvertList2Array {
             }
         }
         return array;
+    }
+
+    /**
+     * Copy all values from the arrays of got List to new List
+     * @param list entered List with the arrays
+     * @return new List with values from the arrays
+     */
+    public List<Integer> convert(List<Integer[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (Integer[] array : list) {
+            for (int value : array) {
+                result.add(value);
+            }
+        }
+        return result;
     }
 }
