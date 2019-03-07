@@ -1,21 +1,28 @@
 package ru.job4j.tracker;
 
 
-public class InputStub implements Input {
-    private  final String[] value;
-    int position = 0;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-    public InputStub(String[] value) {
+public class InputStub implements Input {
+    private  final ArrayList<String> value;
+    Iterator iterator;
+
+    public InputStub(ArrayList<String> value) {
         this.value = value;
+        iterator = value.iterator();
     }
+
+
 
     public String ask(String question) {
-        return this.value[this.position++];
+        return this.iterator.next().toString();
+
     }
 
-    public int ask(String question, int[] range) {
-        int answer = Integer.valueOf(this.value[this.position++]);
-        if (answer < 0 || answer >= range.length) {
+    public int ask(String question, int range) {
+        int answer = Integer.valueOf(this.iterator.next().toString());
+        if (answer < 0 || answer >= range) {
             throw new OutOfMenuException("Out of menu range");
         }
         return answer;

@@ -25,7 +25,7 @@ class FindByName extends BaseAction {
     @Override
     public void execute(Tracker tracker, Input input) {
         System.out.println("************TASK SEARCHING(NAME)***********");
-        Item[] result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
+        ArrayList<Item> result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
         System.out.println("RESULTS:");
         for (Item item : result) {
             System.out.println(item);

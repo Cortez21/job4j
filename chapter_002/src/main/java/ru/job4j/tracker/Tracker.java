@@ -8,9 +8,8 @@ import java.util.*;
  * @since 0.1
  */
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private ArrayList<Item> items = new ArrayList<>();
     private final static Random RM = new Random();
-    private int indexPosition = 0;
 
     /**
      * Добавляет новый елемент в наш массив заявок.
@@ -19,7 +18,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[indexPosition++] = item;
+        items.add(item);
         return item;
     }
 
@@ -30,9 +29,9 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int index = 0; index < this.items.length; index++) {
-            if (this.items[index] != null && this.items[index].getId().equals(id)) {
-                this.items[index] = item;
+        for (Item currentItem : items) {
+            if (currentItem.getId().equals(id)) {
+                items.set(items.indexOf(currentItem), item);
                 item.setId(id);
                 result = true;
                 break;
@@ -48,10 +47,9 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index < this.items.length; index++) {
-            if (this.items[index] != null && this.items[index].getId().equals(id)) {
-                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
-                this.indexPosition--;
+        for (Item item : items) {
+            if (item.getId().equals(id)) {
+                items.remove(item);
                 result = true;
                 break;
             }
@@ -63,8 +61,8 @@ public class Tracker {
      * Возвращает массив со всеми заявками
      * @return - массив со всеми заполненными ячейками
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.indexPosition);
+    public ArrayList<Item> findAll() {
+        return this.items;
     }
 
     /**
@@ -72,16 +70,14 @@ public class Tracker {
      * @param name - ключ для поиска заявок по имени
      * @return - массив со всеми совпадениями по имени
      */
-    public Item[] findByName(String name) {
-        Item[] result = new Item[this.indexPosition];
-        int numOfCopies = 0;
-        for (int index = 0; index < this.indexPosition; index++) {
-            if (this.items[index].getName().equals(name)) {
-                result[numOfCopies] = this.items[index];
-                numOfCopies++;
+    public ArrayList<Item> findByName(String name) {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                result.add(item);
             }
         }
-        return Arrays.copyOf(result, numOfCopies);
+        return result;
     }
 
     /**
@@ -90,12 +86,18 @@ public class Tracker {
      * @return - объект найденной заявки. Если заявка не найдена - возвращает null
      */
     public Item findById(String id) {
-        for (int index = 0; index < indexPosition; index++) {
-            if (this.items[index].getId().equals(id)) {
-                return this.items[index];
+        Item result = null;
+        for (Item item : items) {
+            if (item.getId().equals(id)) {
+                result = item;
+                break;
             }
         }
-        return null;
+        return result;
+    }
+
+    public void clearAll() {
+        items.clear();
     }
 
     /**

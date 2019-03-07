@@ -23,7 +23,7 @@ public class StartUI {
         int key = 0;
         while (key != menu.getActionsLength() - 1) {
             menu.showMenu();
-            key = Integer.valueOf(input.ask("Select your choice: ", new int[menu.getActionsLength()]));
+            key = Integer.valueOf(input.ask("Select your choice: ", menu.getActionsLength()));
             menu.select(key);
         }
     }

@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -25,15 +27,14 @@ public class TrackerTest {
 
     @Test
     public void whenDeleteOneOfThreeElements() {
-        Item[] items = new Item[] {
-                new Item("Name1", "desc"),
-                new Item("Name2", "desc"),
-                new Item("Name3", "desc")
-        };
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("Name1", "desc"));
+        items.add(new Item("Name2", "desc"));
+        items.add(new Item("Name3", "desc"));
         Tracker tracker = new Tracker();
-        tracker.add(items[0]);
-        tracker.add(items[1]);
-        tracker.add(items[2]);
+        tracker.add(items.get(0));
+        tracker.add(items.get(1));
+        tracker.add(items.get(2));
         String id = tracker.add(new Item("Name4", "desc")).getId();
         tracker.delete(id);
         assertThat(tracker.findAll(), is(items));
@@ -41,13 +42,12 @@ public class TrackerTest {
 
     @Test
     public void whenTwoNamesDuplicate() {
-        Item[] items = new Item[] {
-                new Item("name", "desc"),
-                new Item("name", "desc")
-        };
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("name", "desc"));
+        items.add(new Item("name", "desc"));
         Tracker tracker = new Tracker();
-        tracker.add(items[0]);
-        tracker.add(items[1]);
+        tracker.add(items.get(0));
+        tracker.add(items.get(1));
         tracker.add(new Item("notName", "desc"));
         assertThat(tracker.findByName("name"), is(items));
     }

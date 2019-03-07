@@ -2,6 +2,8 @@ package ru.job4j.singletontrackers;
 
 import ru.job4j.tracker.*;
 
+import java.util.ArrayList;
+
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
  * @version $Id$
@@ -49,7 +51,7 @@ public class StaticFinalEagerTracker {
      * Возвращает массив со всеми заявками
      * @return - массив со всеми заполненными ячейками
      */
-    public Item[] findAll() {
+    public ArrayList<Item> findAll() {
         return tracker.findAll();
     }
 
@@ -58,7 +60,7 @@ public class StaticFinalEagerTracker {
      * @param name - ключ для поиска заявок по имени
      * @return - массив со всеми совпадениями по имени
      */
-    public Item[] findByName(String name) {
+    public ArrayList<Item> findByName(String name) {
 
         return tracker.findByName(name);
     }
@@ -70,5 +72,9 @@ public class StaticFinalEagerTracker {
      */
     public Item findById(String id) {
         return tracker.findById(id);
+    }
+
+    public void clearAll() {
+        tracker.clearAll();
     }
 }

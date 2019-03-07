@@ -6,6 +6,8 @@ package ru.job4j.tracker;
 
         import java.io.ByteArrayOutputStream;
         import java.io.PrintStream;
+        import java.util.ArrayList;
+
         import static org.hamcrest.MatcherAssert.assertThat;
         import static org.hamcrest.Matchers.is;
 
@@ -31,15 +33,26 @@ public class StartUITest {
     @Test
     public void whenEmulationCreateNewItemAndExit() {
         Tracker tracker = new Tracker();
-        new StartUI(tracker, new InputStub(new String[]{"0", "New name", "New description", "6"})).init();
-        assertThat(tracker.findAll()[0].getName(), is("New name"));
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("0");
+        answers.add("New name");
+        answers.add("New description");
+        answers.add("6");
+        new StartUI(tracker, new InputStub(answers)).init();
+        assertThat(tracker.findAll().get(0).getName(), is("New name"));
     }
 
     @Test
     public void whenEmulationReplaceItemWithNewNameAndDescription() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("TV", "Don't working TV"));
-        Input input = new InputStub(new String[] {"2", item.getId(), "New name", "New description", "6"});
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("2");
+        answers.add(item.getId());
+        answers.add("New name");
+        answers.add("New description");
+        answers.add("6");
+        Input input = new InputStub(answers);
         new StartUI(tracker, input).init();
         assertThat(tracker.findById(item.getId()).getName(), is("New name"));
     }
@@ -61,8 +74,11 @@ public class StartUITest {
         Item item0 = tracker.add(new Item("task0", "desc0"));
         Item item1 = tracker.add(new Item("task1", "desc1"));
         Item item2 = tracker.add(new Item("task2", "desc2"));
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("1");
+        answers.add("6");
 
-        new StartUI(tracker, new InputStub(new String[] {"1", "6"})).init();
+        new StartUI(tracker, new InputStub(answers)).init();
         assertThat(
                 new String(out.toByteArray()), is(
                         new StringBuilder()
@@ -88,7 +104,11 @@ public class StartUITest {
         Item item = new Item("name", "desc");
         Tracker tracker = new Tracker();
         tracker.add(item);
-        new StartUI(tracker, new InputStub(new String[] {"4", item.getId(), "6"})).init();
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("4");
+        answers.add(item.getId());
+        answers.add("6");
+        new StartUI(tracker, new InputStub(answers)).init();
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
                         .append(buildMenu)
@@ -109,8 +129,13 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         tracker.add(item0);
         tracker.add(item1);
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("3");
+        answers.add(item0.getId());
+        answers.add("1");
+        answers.add("6");
 
-        new StartUI(tracker, new InputStub(new String[] {"3", item0.getId(), "1", "6"})).init();
+        new StartUI(tracker, new InputStub(answers)).init();
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
                         .append(buildMenu)
@@ -135,8 +160,12 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("original", "description");
         tracker.add(item);
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("5");
+        answers.add("original");
+        answers.add("6");
 
-        new StartUI(tracker, new InputStub(new String[] {"5", "original", "6"})).init();
+        new StartUI(tracker, new InputStub(answers)).init();
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
                         .append(buildMenu)
@@ -156,8 +185,12 @@ public class StartUITest {
     @Test
     public void whenEnteringInvalidData() {
         Tracker tracker = new Tracker();
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add("Hi");
+        answers.add("34");
+        answers.add("6");
 
-        new StartUI(tracker, new ValidateInput(new InputStub(new String[] {"Hi", "34", "6"}))).init();
+        new StartUI(tracker, new ValidateInput(new InputStub(answers))).init();
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
                         .append(buildMenu)

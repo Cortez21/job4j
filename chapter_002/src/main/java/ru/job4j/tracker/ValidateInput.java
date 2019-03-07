@@ -13,7 +13,7 @@ public class ValidateInput extends ConsoleInput {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, int range) {
         int answer = -1;
         boolean valid;
         do {

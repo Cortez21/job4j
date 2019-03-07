@@ -12,9 +12,9 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, int range) {
         int answer = Integer.valueOf(ask(question));
-        if (answer < 0 || answer >= range.length) {
+        if (answer < 0 || answer >= range) {
             throw new OutOfMenuException("Out of menu range");
         }
         return answer;

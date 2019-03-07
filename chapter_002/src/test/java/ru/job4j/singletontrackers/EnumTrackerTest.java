@@ -3,6 +3,8 @@ package ru.job4j.singletontrackers;
 import org.junit.Test;
 import ru.job4j.tracker.Item;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -20,33 +22,29 @@ public class EnumTrackerTest {
 
     @Test
     public void whenDeleteOneOfThreeElements() {
-        Item[] items = new Item[] {
-                new Item("Name1", "desc"),
-                new Item("Name2", "desc"),
-                new Item("Name3", "desc")
-        };
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("Name1", "desc"));
+        items.add(new Item("Name2", "desc"));
+        items.add(new Item("Name3", "desc"));
         EnumTracker tracker = EnumTracker.INSTANCE;
-        tracker.add(items[0]);
-        tracker.add(items[1]);
-        tracker.add(items[2]);
+        tracker.add(items.get(0));
+        tracker.add(items.get(1));
+        tracker.add(items.get(2));
         tracker.delete(tracker.add(new Item("Name4", "desc")).getId());
         assertThat(tracker.findAll(), is(items));
     }
 
     @Test
     public void whenTwoNamesDuplicate() {
-        Item[] items = new Item[] {
-                new Item("name", "desc"),
-                new Item("name", "desc")
-        };
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("name", "desc"));
+        items.add(new Item("name", "desc"));
         EnumTracker tracker = EnumTracker.INSTANCE;
-        tracker.add(items[0]);
-        tracker.add(items[1]);
+        tracker.add(items.get(0));
+        tracker.add(items.get(1));
         tracker.add(new Item("notName", "desc"));
         assertThat(tracker.findByName("name"), is(items));
-        for (Item item : tracker.findAll()) {
-            tracker.delete(item.getId());
-        }
+        tracker.clearAll();
     }
 
     @Test
