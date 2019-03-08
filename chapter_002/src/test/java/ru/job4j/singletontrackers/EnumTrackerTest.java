@@ -4,6 +4,7 @@ import org.junit.Test;
 import ru.job4j.tracker.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -22,7 +23,7 @@ public class EnumTrackerTest {
 
     @Test
     public void whenDeleteOneOfThreeElements() {
-        ArrayList<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         items.add(new Item("Name1", "desc"));
         items.add(new Item("Name2", "desc"));
         items.add(new Item("Name3", "desc"));
@@ -36,7 +37,7 @@ public class EnumTrackerTest {
 
     @Test
     public void whenTwoNamesDuplicate() {
-        ArrayList<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         items.add(new Item("name", "desc"));
         items.add(new Item("name", "desc"));
         EnumTracker tracker = EnumTracker.INSTANCE;

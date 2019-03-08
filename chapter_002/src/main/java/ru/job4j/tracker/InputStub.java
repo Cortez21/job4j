@@ -1,14 +1,13 @@
 package ru.job4j.tracker;
 
-
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class InputStub implements Input {
-    private  final ArrayList<String> value;
+    private  final List<String> value;
     Iterator iterator;
 
-    public InputStub(ArrayList<String> value) {
+    public InputStub(List<String> value) {
         this.value = value;
         iterator = value.iterator();
     }

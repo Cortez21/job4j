@@ -29,13 +29,15 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
+        int index = 0;
         for (Item currentItem : items) {
             if (currentItem.getId().equals(id)) {
-                items.set(items.indexOf(currentItem), item);
+                items.set(index, item);
                 item.setId(id);
                 result = true;
                 break;
             }
+            index++;
         }
         return result;
     }
@@ -47,12 +49,14 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
+        int index = 0;
         for (Item item : items) {
             if (item.getId().equals(id)) {
-                items.remove(item);
+                items.remove(index);
                 result = true;
                 break;
             }
+            index++;
         }
         return result;
     }
@@ -61,7 +65,7 @@ public class Tracker {
      * Возвращает массив со всеми заявками
      * @return - массив со всеми заполненными ячейками
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return this.items;
     }
 
@@ -70,7 +74,7 @@ public class Tracker {
      * @param name - ключ для поиска заявок по имени
      * @return - массив со всеми совпадениями по имени
      */
-    public ArrayList<Item> findByName(String name) {
+    public List<Item> findByName(String name) {
         ArrayList<Item> result = new ArrayList<>();
         for (Item item : items) {
             if (item.getName().equals(name)) {

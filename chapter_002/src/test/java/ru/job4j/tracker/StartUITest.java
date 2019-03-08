@@ -7,6 +7,7 @@ package ru.job4j.tracker;
         import java.io.ByteArrayOutputStream;
         import java.io.PrintStream;
         import java.util.ArrayList;
+        import java.util.List;
 
         import static org.hamcrest.MatcherAssert.assertThat;
         import static org.hamcrest.Matchers.is;
@@ -33,7 +34,7 @@ public class StartUITest {
     @Test
     public void whenEmulationCreateNewItemAndExit() {
         Tracker tracker = new Tracker();
-        ArrayList<String> answers = new ArrayList<>();
+        List<String> answers = new ArrayList<>();
         answers.add("0");
         answers.add("New name");
         answers.add("New description");

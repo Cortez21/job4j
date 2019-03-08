@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -27,7 +28,7 @@ public class TrackerTest {
 
     @Test
     public void whenDeleteOneOfThreeElements() {
-        ArrayList<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         items.add(new Item("Name1", "desc"));
         items.add(new Item("Name2", "desc"));
         items.add(new Item("Name3", "desc"));
@@ -42,7 +43,7 @@ public class TrackerTest {
 
     @Test
     public void whenTwoNamesDuplicate() {
-        ArrayList<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         items.add(new Item("name", "desc"));
         items.add(new Item("name", "desc"));
         Tracker tracker = new Tracker();

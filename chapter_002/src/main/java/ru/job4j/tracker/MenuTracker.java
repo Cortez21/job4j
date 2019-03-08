@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class FindById extends BaseAction {
     public FindById(int key, String info) {
@@ -25,7 +26,7 @@ class FindByName extends BaseAction {
     @Override
     public void execute(Tracker tracker, Input input) {
         System.out.println("************TASK SEARCHING(NAME)***********");
-        ArrayList<Item> result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
+        List<Item> result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
         System.out.println("RESULTS:");
         for (Item item : result) {
             System.out.println(item);

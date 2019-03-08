@@ -3,6 +3,7 @@ package ru.job4j.singletontrackers;
 import ru.job4j.tracker.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
@@ -57,7 +58,7 @@ public class InnerHolderLazyTracker {
      * Возвращает массив со всеми заявками
      * @return - массив со всеми заполненными ячейками
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return tracker.findAll();
     }
 
@@ -66,7 +67,7 @@ public class InnerHolderLazyTracker {
      * @param name - ключ для поиска заявок по имени
      * @return - массив со всеми совпадениями по имени
      */
-    public ArrayList<Item> findByName(String name) {
+    public List<Item> findByName(String name) {
 
         return tracker.findByName(name);
     }
