@@ -12,15 +12,19 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 
-public class test {
+public class Test {
     public static void main(String[] args) {
 
         // Create a trust manager that does not validate certificate chains
-        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager(){
-            public X509Certificate[] getAcceptedIssuers(){return null;}
-            public void checkClientTrusted(X509Certificate[] certs, String authType){}
-            public void checkServerTrusted(X509Certificate[] certs, String authType){}
-        }};
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+            public void checkClientTrusted(X509Certificate[] certs, String authType) { }
+            public void checkServerTrusted(X509Certificate[] certs, String authType) { }
+        }
+        };
 
         // Install the all-trusting trust manager
         try {
