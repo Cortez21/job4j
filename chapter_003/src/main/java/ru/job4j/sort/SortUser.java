@@ -14,15 +14,7 @@ public class SortUser {
         users.sort(new Comparator<User>() {
             @Override
             public int compare(User first, User second) {
-                int result;
-                if (first.getName().length() > second.getName().length()) {
-                    result = 1;
-                } else if (first.getName().length() < second.getName().length()) {
-                    result = -1;
-                } else {
-                    result = 0;
-                }
-                return result;
+                return Integer.compare(first.getName().length(), second.getName().length());
             }
         });
         return users;
