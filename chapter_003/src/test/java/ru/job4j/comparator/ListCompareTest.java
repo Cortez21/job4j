@@ -58,5 +58,16 @@ public class ListCompareTest {
         );
         assertThat(rst, lessThan(0));
     }
+    @Test
+    public void secondCharOfLeftLessOnOneButThirdCharOfRightGreaterOnOneShouldBePositive() {
+        ListCompare compare = new ListCompare();
+        int rst = compare.compare(
+                "Pesrov",
+                "Pdtrov"
+        );
+        assertThat(rst, greaterThan(0));
+    }
+
+
 }
 
