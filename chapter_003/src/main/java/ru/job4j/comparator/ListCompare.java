@@ -20,18 +20,13 @@ public class ListCompare implements Comparator<String> {
 
         int result = 0;
         for (int i = 0; i < Integer.min(left.length(), right.length()); i++) {
-            if (left.charAt(i) < right.charAt(i)) {
-                result = -1;
-                break;
-            } else if (left.charAt(i) > right.charAt(i)) {
-                result = 1;
+            result = Character.compare(left.charAt(i), right.charAt(i));
+            if (result != 0) {
                 break;
             }
         }
-        if (result == 0 && left.length() > right.length()) {
-            result = 1;
-        } else if (result == 0 && left.length() < right.length()) {
-            result = -1;
+        if (result == 0) {
+            result = Integer.compare(left.length(), right.length());
         }
 
         return result;
