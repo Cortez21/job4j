@@ -1,4 +1,2 @@
-http://job4j.ru/
-Я хочу пройти весь курс job4j до конца текущего года
-К началу 2019 года я хочу устроиться на работу по ваканчии java - developer
-Проверка доступа 2
+[![Build Status](https://travis-ci.org/Cortez21/job4j.svg?branch=master)](https://travis-ci.org/Cortez21/job4j)
+[![codecov](https://codecov.io/gh/Cortez21/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/Cortez21/job4j)
