@@ -15,7 +15,7 @@ public class Bank {
      * @param user
      */
     public void addUser(User user) {
-        clients.put(user, new ArrayList<>());
+        clients.putIfAbsent(user, new ArrayList<>());
     }
 
     /**
@@ -39,29 +39,36 @@ public class Bank {
      * @param passport
      * @return user class
      */
-    public User findUser(String passport) {
+    public User findUser(String passport) throws UserNotFoundException {
         Set<User> users = clients.keySet();
         User user = null;
         for (User curUser : users) {
             if (curUser.getPassport().equals(passport)) {
                 user = curUser;
+                break;
             }
+        }
+        if (user == null) {
+            throw new UserNotFoundException("User with this passport is absent in database");
         }
         return user;
     }
 
     /**
      * Searching user's account from the entered requisites
-     * @param user
+     * @param passport
      * @param reqs
      * @return Account class
      */
-    public Account findAccount(User user, String reqs) {
+    public Account findAccount(String passport, String reqs) throws UserNotFoundException, AccountNotFoundException {
         Account result = null;
-        for (Account account : clients.get(user)) {
+        for (Account account : clients.get(findUser(passport))) {
             if (account.getRequisites().equals(reqs)) {
                 result = account;
             }
+        }
+        if (result == null) {
+            throw new AccountNotFoundException("This account is absent in database");
         }
         return result;
     }
@@ -71,7 +78,7 @@ public class Bank {
      * @param passport
      * @param account
      */
-    public void addAccountToUser(String passport, Account account) {
+    public void addAccountToUser(String passport, Account account) throws UserNotFoundException {
         clients.get(findUser(passport)).add(account);
     }
 
@@ -80,7 +87,7 @@ public class Bank {
      * @param passport
      * @param account
      */
-    public void deleteAccountFromUser(String passport, Account account) {
+    public void deleteAccountFromUser(String passport, Account account) throws UserNotFoundException, AccountNotFoundException {
         clients.get(findUser(passport)).remove(account);
     }
 
@@ -89,7 +96,7 @@ public class Bank {
      * @param passport
      * @return
      */
-    public List<Account> getUserAccounts(String passport) {
+    public List<Account> getUserAccounts(String passport) throws UserNotFoundException {
         return clients.get(findUser(passport));
     }
 
@@ -97,17 +104,17 @@ public class Bank {
      * Transfering money from one user's account to another
      * @param srcPassport passport of user from whose account getting money for transfer
      * @param srcRequisite requisites of user from whose account getting money for transfer
-     * @param destPassport passport of user to whose account putting money
+     * @param dstPassport passport of user to whose account putting money
      * @param dstRequisite requisites of user to whose account putting money
      * @param amount Sum of money which transfer to
      * @return Answer about successful of this operation
      */
-    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) throws UserNotFoundException, AccountNotFoundException {
         boolean result = false;
         User srcUser = findUser(srcPassport);
-        User dstUser = findUser(destPassport);
-        Account srcAccount = findAccount(srcUser, srcRequisite);
-        Account dstAccount = findAccount(dstUser, dstRequisite);
+        User dstUser = findUser(dstPassport);
+        Account srcAccount = findAccount(srcPassport, srcRequisite);
+        Account dstAccount = findAccount(dstPassport, dstRequisite);
         if (clients.get(srcUser).contains(srcAccount)
                 && clients.get(dstUser).contains(dstAccount)
                 && srcAccount.getMoney(amount)

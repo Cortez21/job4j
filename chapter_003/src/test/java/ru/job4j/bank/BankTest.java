@@ -24,6 +24,17 @@ public class BankTest {
     }
 
     @Test
+    public void whenAddedOneUserTwoTimes() {
+        Bank bank = new Bank();
+        User alex = new User("Alex", "01");
+        bank.addUser(alex);
+        bank.addUser(alex);
+        Set<User> expect = new HashSet<>();
+        expect.add(alex);
+        assertThat(bank.getAllUsers(), is(expect));
+    }
+
+    @Test
     public void whenDeleteOneOfTwoUsers() {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
@@ -37,7 +48,7 @@ public class BankTest {
     }
 
     @Test
-    public void whenFindSingleUser() {
+    public void whenFindSingleUser() throws UserNotFoundException {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         bank.addUser(alex);
@@ -45,7 +56,7 @@ public class BankTest {
     }
 
     @Test
-    public void whenAddTwoAccountsAndDeleteOneOfThem() {
+    public void whenAddTwoAccountsAndDeleteOneOfThem() throws UserNotFoundException, AccountNotFoundException {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         bank.addUser(alex);
@@ -60,7 +71,7 @@ public class BankTest {
     }
 
     @Test
-    public void whenTransferFromAlexToFranky500Dollars() {
+    public void whenTransferFromAlexToFranky500Dollars() throws UserNotFoundException, AccountNotFoundException {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         User franky = new User("Franky", "02");
