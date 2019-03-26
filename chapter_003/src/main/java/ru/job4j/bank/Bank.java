@@ -87,7 +87,7 @@ public class Bank {
      * @param passport
      * @param account
      */
-    public void deleteAccountFromUser(String passport, Account account) throws UserNotFoundException, AccountNotFoundException {
+    public void deleteAccountFromUser(String passport, Account account) throws UserNotFoundException {
         clients.get(findUser(passport)).remove(account);
     }
 

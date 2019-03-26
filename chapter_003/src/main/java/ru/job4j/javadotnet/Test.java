@@ -35,9 +35,9 @@ public class Test {
         }
 
 
-        String query = "https://www.google.com";
+        String query = "https://portal.alpm.com.ua";
         HttpURLConnection connection = null;
-        String cookieString = "_ga=GA1.3.1939077366.1551894560; _gid=GA1.3.65112970.1551894560; sessioncode=9a7054467bfbbe0ae0c22674ea2576f9; portal3030=b89ce8383a580f4ea589dec8074a89db";
+        String cookieString = "_ga=GA1.3.1939077366.1551894560; _gid=GA1.3.65112970.1551894560; portal3030=9109d956ad2e1cf551c9c274d755630d; sessioncode=5c2a93e4cf00705ccf8af8bdcdb9aa33";
         try {
 
             connection = (HttpURLConnection) new URL(query).openConnection();
