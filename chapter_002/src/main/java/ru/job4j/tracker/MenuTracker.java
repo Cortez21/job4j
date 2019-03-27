@@ -2,19 +2,20 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 class FindById extends BaseAction {
     public FindById(int key, String info) {
         super(key, info);
     }
     @Override
-    public void execute(Tracker tracker, Input input) {
-        System.out.println("************TASK SEARCHING(ID)************");
+    public void execute(Tracker tracker, Input input, Consumer output) {
+        output.accept("************TASK SEARCHING(ID)************");
         Item result = tracker.findById(input.ask("Please, enter ID of task for searching: "));
         if (result == null) {
-            System.out.println("Task not found. Please enter ID correctly");
+            output.accept("Task not found. Please enter ID correctly");
         } else {
-            System.out.println(result);
+            output.accept(result.toString());
         }
     }
 }
@@ -24,14 +25,14 @@ class FindByName extends BaseAction {
         super(key, info);
     }
     @Override
-    public void execute(Tracker tracker, Input input) {
-        System.out.println("************TASK SEARCHING(NAME)***********");
+    public void execute(Tracker tracker, Input input, Consumer output) {
+        output.accept("************TASK SEARCHING(NAME)***********");
         List<Item> result = tracker.findByName(input.ask("Please, enter name of task for searching: "));
-        System.out.println("RESULTS:");
+        output.accept("RESULTS:");
         for (Item item : result) {
-            System.out.println(item);
+            output.accept(item.toString());
         }
-        System.out.println("END");
+        output.accept("END");
     }
 }
 
@@ -40,7 +41,7 @@ class Exit extends BaseAction {
         super(key, info);
     }
     @Override
-    public void execute(Tracker tracker, Input input) {
+    public void execute(Tracker tracker, Input input, Consumer output) {
     }
 }
 
@@ -48,14 +49,16 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private ArrayList<UserAction> actions = new ArrayList<>();
+    private Consumer<String> output;
 
     public int getActionsLength() {
         return actions.size();
     }
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     public void fillActions() {
@@ -69,12 +72,13 @@ public class MenuTracker {
     }
 
     public void select(int key) {
-        actions.get(key).execute(this.tracker, this.input);
+
+        actions.get(key).execute(this.tracker, this.input, output);
     }
 
     public void showMenu() {
         for (UserAction action : this.actions) {
-            System.out.println(action.info());
+            output.accept(action.info());
         }
     }
 
@@ -83,10 +87,10 @@ public class MenuTracker {
             super(key, info);
         }
         @Override
-        public void execute(Tracker tracker, Input input) {
-            System.out.println("**************CREATING NEW TASK***************");
+        public void execute(Tracker tracker, Input input, Consumer output) {
+            output.accept("**************CREATING NEW TASK***************");
             tracker.add(new Item(input.ask("Please, enter task's name: "), input.ask("Please, enter description: ")));
-            System.out.println("Task was created!");
+            output.accept("Task was created!");
         }
     }
 
@@ -95,12 +99,12 @@ public class MenuTracker {
             super(key, info);
         }
         @Override
-        public void execute(Tracker tracker, Input input) {
-            System.out.println("List of tasks:");
+        public void execute(Tracker tracker, Input input, Consumer output) {
+            output.accept("List of tasks:");
             for (Item item: tracker.findAll()) {
-                System.out.println(item);
+                output.accept(item.toString());
             }
-            System.out.println("END");
+            output.accept("END");
         }
     }
 
@@ -109,16 +113,16 @@ public class MenuTracker {
             super(key, info);
         }
         @Override
-        public void execute(Tracker tracker, Input input) {
-            System.out.println("**************EDITING TASK****************");
+        public void execute(Tracker tracker, Input input, Consumer output) {
+            output.accept("**************EDITING TASK****************");
             boolean result = tracker.replace(
                     input.ask("Enter tasks's ID for editing: "),
                     new Item(input.ask("Enter new name for task: "), input.ask("Enter new description for task: "))
             );
             if (result) {
-                System.out.println("Task's data was changed.");
+                output.accept("Task's data was changed.");
             } else {
-                System.out.println("ERROR. ADVICE: CHECK THE ID!");
+                output.accept("ERROR. ADVICE: CHECK THE ID!");
             }
         }
     }
@@ -128,13 +132,13 @@ public class MenuTracker {
             super(key, info);
         }
         @Override
-        public void execute(Tracker tracker, Input input) {
-            System.out.println("****************DELETING TASK****************");
+        public void execute(Tracker tracker, Input input, Consumer output) {
+            output.accept("****************DELETING TASK****************");
             boolean result = tracker.delete(input.ask("Enter task's ID for delete: "));
             if (result) {
-                System.out.println("Task was deleted.");
+                output.accept("Task was deleted.");
             } else {
-                System.out.println("ERROR. ADVICE: CHECK THE ID!");
+                output.accept("ERROR. ADVICE: CHECK THE ID!");
             }
         }
     }

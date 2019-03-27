@@ -8,13 +8,25 @@ package ru.job4j.tracker;
         import java.io.PrintStream;
         import java.util.ArrayList;
         import java.util.List;
+        import java.util.function.Consumer;
 
         import static org.hamcrest.MatcherAssert.assertThat;
         import static org.hamcrest.Matchers.is;
 
 public class StartUITest {
-    private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final PrintStream stdout = new PrintStream(out);
+    private final Consumer<String> output = new Consumer<String>() {
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+
+        @Override
+        public String toString() {
+            return new String(out.toByteArray());
+        }
+    };
     private final StringBuilder buildMenu = new StringBuilder()
             .append("0. Add new Item")
             .append(System.lineSeparator())
@@ -39,7 +51,7 @@ public class StartUITest {
         answers.add("New name");
         answers.add("New description");
         answers.add("6");
-        new StartUI(tracker, new InputStub(answers)).init();
+        new StartUI(tracker, new InputStub(answers), output).init();
         assertThat(tracker.findAll().get(0).getName(), is("New name"));
     }
 
@@ -54,7 +66,7 @@ public class StartUITest {
         answers.add("New description");
         answers.add("6");
         Input input = new InputStub(answers);
-        new StartUI(tracker, input).init();
+        new StartUI(tracker, input, System.out::println).init();
         assertThat(tracker.findById(item.getId()).getName(), is("New name"));
     }
 
@@ -79,9 +91,9 @@ public class StartUITest {
         answers.add("1");
         answers.add("6");
 
-        new StartUI(tracker, new InputStub(answers)).init();
+        new StartUI(tracker, new InputStub(answers), output).init();
         assertThat(
-                new String(out.toByteArray()), is(
+                output.toString(), is(
                         new StringBuilder()
                                 .append(buildMenu)
                                 .append("List of tasks:")
@@ -109,8 +121,8 @@ public class StartUITest {
         answers.add("4");
         answers.add(item.getId());
         answers.add("6");
-        new StartUI(tracker, new InputStub(answers)).init();
-        assertThat(new String(out.toByteArray()), is(
+        new StartUI(tracker, new InputStub(answers), System.out::println).init();
+        assertThat(output.toString(), is(
                 new StringBuilder()
                         .append(buildMenu)
                         .append("************TASK SEARCHING(ID)************")
@@ -136,8 +148,8 @@ public class StartUITest {
         answers.add("1");
         answers.add("6");
 
-        new StartUI(tracker, new InputStub(answers)).init();
-        assertThat(new String(out.toByteArray()), is(
+        new StartUI(tracker, new InputStub(answers), System.out::println).init();
+        assertThat(output.toString(), is(
                 new StringBuilder()
                         .append(buildMenu)
                         .append("****************DELETING TASK****************")
@@ -166,8 +178,8 @@ public class StartUITest {
         answers.add("original");
         answers.add("6");
 
-        new StartUI(tracker, new InputStub(answers)).init();
-        assertThat(new String(out.toByteArray()), is(
+        new StartUI(tracker, new InputStub(answers), System.out::println).init();
+        assertThat(output.toString(), is(
                 new StringBuilder()
                         .append(buildMenu)
                         .append("************TASK SEARCHING(NAME)***********")
@@ -191,8 +203,8 @@ public class StartUITest {
         answers.add("34");
         answers.add("6");
 
-        new StartUI(tracker, new ValidateInput(new InputStub(answers))).init();
-        assertThat(new String(out.toByteArray()), is(
+        new StartUI(tracker, new ValidateInput(new InputStub(answers)), System.out::println).init();
+        assertThat(output.toString(), is(
                 new StringBuilder()
                         .append(buildMenu)
                         .append("Please, enter valid data!")

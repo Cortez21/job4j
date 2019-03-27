@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 public interface UserAction {
 
     /**
@@ -11,7 +13,7 @@ public interface UserAction {
     /**
      * Use action of the current position
      */
-    void execute(Tracker tracker, Input input);
+    void execute(Tracker tracker, Input input, Consumer output);
 
     /**
      * Return information about current action
