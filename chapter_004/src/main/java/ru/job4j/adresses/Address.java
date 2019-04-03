@@ -14,6 +14,10 @@ public class Address {
 
     }
 
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder()
@@ -26,5 +30,15 @@ public class Address {
                 .append(apartment)
                 .toString();
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.hashCode() == obj.hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        return new StringBuilder().append(city).append(street).append(home).append(apartment).toString().hashCode();
     }
 }

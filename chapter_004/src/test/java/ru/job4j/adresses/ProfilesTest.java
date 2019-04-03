@@ -16,8 +16,10 @@ public class ProfilesTest {
         Address address1 = new Address("New York", "Wall Street", 45, 111);
         Address address2 = new Address("Berlin", "Huegrassdt", 2, 145);
         Address address3 = new Address("Kiev", "Khrechsatyk", 67, 5);
-        List<Profile> profiles = Arrays.asList(new Profile(address1), new Profile(address2), new Profile(address3));
+        Address address4 = new Address("New York", "Wall Street", 45, 111);
+        Address address5 = new Address("Kiev", "Khrechsatyk", 67, 5);
+        List<Profile> profiles = Arrays.asList(new Profile(address1), new Profile(address2), new Profile(address3), new Profile(address4), new Profile(address5));
         List<Address> result = prof.collect(profiles);
-        assertThat(result, is(Arrays.asList(address1, address2, address3)));
+        assertThat(result, is(Arrays.asList(address2, address3, address1)));
     }
 }
