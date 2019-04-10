@@ -82,6 +82,8 @@ public class BankTest {
         bank.addAccountToUser(alex.getPassport(), alexAcc);
         bank.addAccountToUser(franky.getPassport(), frankyAcc);
         alexAcc.putMoney(500);
-        assertThat(bank.transferMoney(alex.getPassport(), alexAcc.getRequisites(), franky.getPassport(), frankyAcc.getRequisites(), 500), is(true));
+        assertThat(bank.transferMoney(
+                alex.getPassport(), alexAcc.getRequisites(), franky.getPassport(), frankyAcc.getRequisites(), 500),
+                is(true));
     }
 }

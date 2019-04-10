@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Maksim Yunusov (mailto:cortezzz1987@gmail.com)
@@ -41,13 +42,7 @@ public class Bank {
      */
     public User findUser(String passport) throws UserNotFoundException {
         Set<User> users = clients.keySet();
-        User user = null;
-        for (User curUser : users) {
-            if (curUser.getPassport().equals(passport)) {
-                user = curUser;
-                break;
-            }
-        }
+        User user = users.stream().filter(usr -> usr.getPassport() == passport).collect(Collectors.toList()).get(0);
         if (user == null) {
             throw new UserNotFoundException("User with this passport is absent in database");
         }
@@ -61,12 +56,7 @@ public class Bank {
      * @return Account class
      */
     public Account findAccount(String passport, String reqs) throws UserNotFoundException, AccountNotFoundException {
-        Account result = null;
-        for (Account account : clients.get(findUser(passport))) {
-            if (account.getRequisites().equals(reqs)) {
-                result = account;
-            }
-        }
+        Account result = clients.get(findUser(passport)).stream().filter(acc -> acc.getRequisites() == reqs).collect(Collectors.toList()).get(0);
         if (result == null) {
             throw new AccountNotFoundException("This account is absent in database");
         }
