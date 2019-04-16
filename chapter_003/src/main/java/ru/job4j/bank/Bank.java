@@ -23,8 +23,13 @@ public class Bank {
      * Remove user from map
      * @param user
      */
-    public void deleteUser(User user) {
-        clients.remove(user);
+    public boolean deleteUser(User user) {
+        boolean result = false;
+        if (clients.containsKey(user)) {
+            clients.remove(user);
+            result = true;
+        }
+        return result;
     }
 
     /**
@@ -40,13 +45,14 @@ public class Bank {
      * @param passport
      * @return user class
      */
-    public User findUser(String passport) throws UserNotFoundException {
+    public User findUser(String passport) {
         Set<User> users = clients.keySet();
-        User user = users.stream().filter(usr -> usr.getPassport() == passport).collect(Collectors.toList()).get(0);
-        if (user == null) {
-            throw new UserNotFoundException("User with this passport is absent in database");
+        User result = new User("User not found", "User not found");
+        User user = users.stream().filter(usr -> usr.getPassport().equals(passport)).collect(Collectors.toList()).get(0);
+        if (user != null) {
+            result = user;
         }
-        return user;
+        return result;
     }
 
     /**
@@ -55,12 +61,8 @@ public class Bank {
      * @param reqs
      * @return Account class
      */
-    public Account findAccount(String passport, String reqs) throws UserNotFoundException, AccountNotFoundException {
-        Account result = clients.get(findUser(passport)).stream().filter(acc -> acc.getRequisites() == reqs).collect(Collectors.toList()).get(0);
-        if (result == null) {
-            throw new AccountNotFoundException("This account is absent in database");
-        }
-        return result;
+    public Account findAccount(String passport, String reqs) {
+        return clients.get(findUser(passport)).stream().filter(acc -> acc.getRequisites() == reqs).collect(Collectors.toList()).get(0);
     }
 
     /**
@@ -68,8 +70,8 @@ public class Bank {
      * @param passport
      * @param account
      */
-    public void addAccountToUser(String passport, Account account) throws UserNotFoundException {
-        clients.get(findUser(passport)).add(account);
+    public boolean addAccountToUser(String passport, Account account) {
+        return clients.get(findUser(passport)).add(account);
     }
 
     /**
@@ -77,8 +79,8 @@ public class Bank {
      * @param passport
      * @param account
      */
-    public void deleteAccountFromUser(String passport, Account account) throws UserNotFoundException {
-        clients.get(findUser(passport)).remove(account);
+    public boolean deleteAccountFromUser(String passport, Account account) {
+        return clients.get(findUser(passport)).remove(account);
     }
 
     /**
@@ -86,7 +88,7 @@ public class Bank {
      * @param passport
      * @return
      */
-    public List<Account> getUserAccounts(String passport) throws UserNotFoundException {
+    public List<Account> getUserAccounts(String passport) {
         return clients.get(findUser(passport));
     }
 
@@ -99,17 +101,10 @@ public class Bank {
      * @param amount Sum of money which transfer to
      * @return Answer about successful of this operation
      */
-    public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) throws UserNotFoundException, AccountNotFoundException {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) {
         boolean result = false;
-        User srcUser = findUser(srcPassport);
-        User dstUser = findUser(dstPassport);
-        Account srcAccount = findAccount(srcPassport, srcRequisite);
-        Account dstAccount = findAccount(dstPassport, dstRequisite);
-        if (clients.get(srcUser).contains(srcAccount)
-                && clients.get(dstUser).contains(dstAccount)
-                && srcAccount.getMoney(amount)
-        ) {
-            dstAccount.putMoney(amount);
+        if (findAccount(srcPassport, srcRequisite).getMoney(amount)) {
+            findAccount(dstPassport, dstRequisite).putMoney(amount);
             result = true;
         }
         return result;
