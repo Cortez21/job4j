@@ -48,7 +48,7 @@ public class BankTest {
     }
 
     @Test
-    public void whenFindSingleUser() throws UserNotFoundException {
+    public void whenFindSingleUser() {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         bank.addUser(alex);
@@ -56,7 +56,7 @@ public class BankTest {
     }
 
     @Test
-    public void whenAddTwoAccountsAndDeleteOneOfThem() throws UserNotFoundException, AccountNotFoundException {
+    public void whenAddTwoAccountsAndDeleteOneOfThem()  {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         bank.addUser(alex);
@@ -71,7 +71,7 @@ public class BankTest {
     }
 
     @Test
-    public void whenTransferFromAlexToFranky500Dollars() throws UserNotFoundException, AccountNotFoundException {
+    public void whenTransferFromAlexToFranky500Dollars() {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         User franky = new User("Franky", "02");
@@ -85,5 +85,22 @@ public class BankTest {
         assertThat(bank.transferMoney(
                 alex.getPassport(), alexAcc.getRequisites(), franky.getPassport(), frankyAcc.getRequisites(), 500),
                 is(true));
+    }
+
+    @Test
+    public void whenTransferFromAlexToFranky500DollarsUsingWrongData() {
+        Bank bank = new Bank();
+        User alex = new User("Alex", "01");
+        User franky = new User("Franky", "02");
+        bank.addUser(alex);
+        bank.addUser(franky);
+        Account alexAcc = new Account("01");
+        Account frankyAcc = new Account("02");
+        bank.addAccountToUser(alex.getPassport(), alexAcc);
+        bank.addAccountToUser(franky.getPassport(), frankyAcc);
+        alexAcc.putMoney(500);
+        assertThat(bank.transferMoney(
+                "05", alexAcc.getRequisites(), "08", frankyAcc.getRequisites(), 500),
+                is(false));
     }
 }

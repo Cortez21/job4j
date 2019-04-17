@@ -47,12 +47,8 @@ public class Bank {
      */
     public User findUser(String passport) {
         Set<User> users = clients.keySet();
-        User result = new User("User not found", "User not found");
-        User user = users.stream().filter(usr -> usr.getPassport().equals(passport)).collect(Collectors.toList()).get(0);
-        if (user != null) {
-            result = user;
-        }
-        return result;
+        List<User> result = users.stream().filter(usr -> usr.getPassport().equals(passport)).collect(Collectors.toList());
+        return result.size() > 0 ? result.get(0) : null;
     }
 
     /**
@@ -62,7 +58,12 @@ public class Bank {
      * @return Account class
      */
     public Account findAccount(String passport, String reqs) {
-        return clients.get(findUser(passport)).stream().filter(acc -> acc.getRequisites() == reqs).collect(Collectors.toList()).get(0);
+        User user = findUser(passport);
+        Account result = null;
+        if (user != null) {
+            result = clients.get(findUser(passport)).stream().filter(acc -> acc.getRequisites().equals(reqs)).collect(Collectors.toList()).get(0);
+        }
+        return result;
     }
 
     /**
@@ -103,7 +104,9 @@ public class Bank {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) {
         boolean result = false;
-        if (findAccount(srcPassport, srcRequisite).getMoney(amount)) {
+        Account srcAcc = findAccount(srcPassport, srcRequisite);
+        Account dstAcc = findAccount(dstPassport, dstRequisite);
+        if (srcAcc != null && dstAcc != null && findAccount(srcPassport, srcRequisite).getMoney(amount)) {
             findAccount(dstPassport, dstRequisite).putMoney(amount);
             result = true;
         }
