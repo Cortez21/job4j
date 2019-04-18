@@ -14,15 +14,17 @@ public class SortUserTest {
     @Test
     public void testForSort() {
         SortUser sortUser = new SortUser();
-        List<User> list = new ArrayList<>();
-        list.add(new User("Andrey", 67));
-        list.add(new User("Alex", 23));
-        list.add(new User("Ivan", 34));
+        List<User> list = List.of(
+                new User("Andrey", 67),
+                new User("Alex", 23),
+                new User("Ivan", 34)
+        );
 
-        Set<User> set = new TreeSet<>();
-        set.add(new User("Alex", 23));
-        set.add(new User("Ivan", 34));
-        set.add(new User("Andrey", 67));
+        Set<User> set = Set.of(
+                new User("Alex", 23),
+                new User("Ivan", 34),
+                new User("Andrey", 67)
+        );
 
         assertThat(sortUser.sort(list), is(set));
     }
@@ -34,18 +36,11 @@ public class SortUserTest {
         User jama = new User("Jamalungma", 25);
         User ed = new User("Ed", 29);
 
-        List<User> source = new ArrayList<>();
-        source.add(ramirez);
-        source.add(jama);
-        source.add(ed);
+        List<User> source = List.of(ramirez, jama, ed);
 
-        List<User> expect = new ArrayList<>();
-        expect.add(ed);
-        expect.add(ramirez);
-        expect.add(jama);
+        List<User> expect = List.of(ed, ramirez, jama);
 
-        List<User> result = sort.sortNameLength(source);
-        assertThat(result, is(expect));
+        assertThat(sort.sortNameLength(source), is(expect));
 
     }
 
@@ -57,20 +52,9 @@ public class SortUserTest {
         User joeOld = new User("Joe", 52);
         User joeYoung = new User("Joe", 21);
 
-        List<User> source = new ArrayList<>();
-        source.add(joeOld);
-        source.add(mikeYoung);
-        source.add(mikeOld);
-        source.add(joeYoung);
-
-        List<User> expect = new ArrayList<>();
-        expect.add(joeYoung);
-        expect.add(joeOld);
-        expect.add(mikeYoung);
-        expect.add(mikeOld);
-
-        List<User> result = sort.sortByAllFields(source);
-        assertThat(result, is(expect));
+        List<User> source = List.of(joeOld, mikeYoung, mikeOld, joeYoung);
+        List<User> expect = List.of(joeYoung, joeOld, mikeYoung, mikeOld);
+        assertThat(sort.sortByAllFields(source), is(expect));
     }
 }
 

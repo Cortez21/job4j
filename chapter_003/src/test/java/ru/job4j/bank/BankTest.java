@@ -18,8 +18,7 @@ public class BankTest {
         Bank bank = new Bank();
         User alex = new User("Alex", "01");
         bank.addUser(alex);
-        Set<User> expect = new HashSet<>();
-        expect.add(alex);
+        Set<User> expect = Set.of(alex);
         assertThat(bank.getAllUsers(), is(expect));
     }
 
@@ -29,8 +28,7 @@ public class BankTest {
         User alex = new User("Alex", "01");
         bank.addUser(alex);
         bank.addUser(alex);
-        Set<User> expect = new HashSet<>();
-        expect.add(alex);
+        Set<User> expect = Set.of(alex);
         assertThat(bank.getAllUsers(), is(expect));
     }
 
@@ -42,8 +40,7 @@ public class BankTest {
         bank.addUser(alex);
         bank.addUser(franky);
         bank.deleteUser(alex);
-        Set<User> expect = new HashSet<>();
-        expect.add(franky);
+        Set<User> expect = Set.of(franky);
         assertThat(bank.getAllUsers(), is(expect));
     }
 
@@ -65,8 +62,7 @@ public class BankTest {
         bank.addAccountToUser(alex.getPassport(), account0);
         bank.addAccountToUser(alex.getPassport(), account1);
         bank.deleteAccountFromUser(alex.getPassport(), account0);
-        List<Account> expect = new ArrayList<>();
-        expect.add(account1);
+        List<Account> expect = List.of(account1);
         assertThat(bank.getUserAccounts(alex.getPassport()), is(expect));
     }
 
