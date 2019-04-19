@@ -22,10 +22,10 @@ public class PhoneDictionary {
      * @return list of found users
      */
     public List<Person> find(String key) {
-        ArrayList<Person> result = new ArrayList();
-        Iterator<Person> iterator = persons.iterator();
+        var result = new ArrayList();
+        var iterator = persons.iterator();
         while (iterator.hasNext()) {
-            Person temp = iterator.next();
+            var temp = iterator.next();
             if (temp.getName().contains(key) || temp.getPhone().contains(key) || temp.getSurname().contains(key) || temp.getAddress().contains(key)) {
                 result.add(temp);
             }
